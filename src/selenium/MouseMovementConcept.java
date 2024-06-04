@@ -5,8 +5,9 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
-public class FrameHandling {
+public class MouseMovementConcept {
 
 	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver","D:\\personalProject\\SeleniumFolder\\Browsers\\chromedriver.exe");
@@ -19,21 +20,15 @@ public class FrameHandling {
 		driver.manage().timeouts().pageLoadTimeout(40,TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		
-		driver.get("https://freecrm.com/pricing.html");//enter URL
-		driver.findElement(By.xpath("//span[contains(text(),'Log In')]")).click();
-		driver.findElement(By.name("email")).sendKeys("dinislam2698@gmail.com");
-		driver.findElement(By.name("password")).sendKeys("Din@98test");
-		driver.findElement(By.xpath("//div[@class='ui fluid large blue submit button']")).click();
-		Thread.sleep(5000);
+		driver.get("https://www.spicejet.com/");//enter URL
 		
-		//if uses frame tag.so,at first we have to switch to frame
-//		driver.switchTo().frame("frameName");
-//		Thread.sleep(2000);
+		Actions action = new Actions(driver);
+		action.moveToElement(driver.findElement(By.xpath("//div[contains(text(),'Add-ons')]"))).build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.linkText("SpiceCafé")).click();
+		System.out.println(driver.getTitle());
 		
-//		driver.findElement(By.linkText("Contacts")).click();
-		driver.findElement(By.xpath("//span[contains(text(),'Contacts')]")).click();
 
-	
 	}
 
 }
