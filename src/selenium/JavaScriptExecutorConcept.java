@@ -39,7 +39,27 @@ public class JavaScriptExecutorConcept {
 	    Thread.sleep(1000);
 	    alert.accept();
 	    
-	    clickElementByJs(loginBtn, driver);
+	    //click on any element by using JS  executor
+//	    clickElementByJs(loginBtn, driver);
+	    
+	    //refresh Browser
+	    //1.By using selenium
+	    driver.navigate().refresh();
+	    //2.By using JS executor
+//	    refreshBrowserByJs(driver);
+	    
+	    //getTitle by using JS
+	    System.out.println(getTitleByJs(driver));
+	    
+	    //getPageText by using JS
+	    System.out.println(getPageInnerText(driver));
+	    
+	    //scrollPage Down by using JS
+//	    scrollPageDown(driver);
+	    
+	    WebElement forgotPassLink = driver.findElement(By.xpath("//span[contains(text(),'Free')]"));
+	    scrollIntoView(forgotPassLink, driver);
+	    
 		
 
 	}
@@ -77,6 +97,34 @@ public class JavaScriptExecutorConcept {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 	}
+	
+	public static void refreshBrowserByJs(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("history.go(0)");
+	}
+	
+	public static String getTitleByJs(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String title = js.executeScript("return document.title;").toString();
+		return title;
+	}
+	
+	public static String getPageInnerText(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String pageText = js.executeScript("return document.documentElement.innerText;").toString();
+		return pageText;
+	}
+	
+	public static void scrollPageDown(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+	}
+	
+	public static void scrollIntoView(WebElement element,WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
 	
 	
 	
